@@ -10,4 +10,4 @@
   El archivo properties de la aplicación se encuentra en [Properties file](https://github.com/rigoxls/employee-test/blob/main/src/main/resources/application.properties)   
   
 ### Colección de Postman
-  Se encuentra en publicada en la siguiente Url [Postman](https://www.getpostman.com/collections/6327e92b4c024d36edcc)   
+  Se encuentra en publicada en la siguiente Url [Postman](https://documenter.getpostman.com/view/1701963/TW74j5XM)   
