@@ -31,6 +31,11 @@ public class EmployeeService {
 
 	}
 
+	/**
+	 * Method to create an employee
+	 * @param newEmployee
+	 * @return
+	 */
 	public EmployeeEntity createEmployee(EmployeeDTO newEmployee) {
 		EmployeeEntity employee = new EmployeeEntity(newEmployee);
 		System.out.println(employee);
@@ -38,6 +43,12 @@ public class EmployeeService {
 		return employee;
 	}
 
+	/**
+	 * Method to update an employee
+	 * @param employeeToUpdate
+	 * @return
+	 * @throws EmployeeNotFoundException
+	 */
 	public EmployeeEntity updateEmployee(EmployeeDTO employeeToUpdate) throws EmployeeNotFoundException {
 		Long employeeId = employeeToUpdate.getId();
 		try {
@@ -50,21 +61,43 @@ public class EmployeeService {
 		}
 	}
 
+	/**
+	 * Method to get an employee by id
+	 * @param employeeId
+	 * @return
+	 */
 	public Optional<EmployeeEntity> getEmployeeById(long employeeId) {
 		Optional<EmployeeEntity> employee = employeeRepository.findById(employeeId);
 		return employee;
 	}
 
+	/**
+	 * Method to list all current employees
+	 * @return
+	 */
 	public List<EmployeeEntity> getAllEmployees() {
 		List<EmployeeEntity> employees = employeeRepository.findAll();
 		return employees;
 	}
 
+	/**
+	 * Method to delete an employee
+	 * @param employeeId
+	 * @return
+	 */
 	public Void deleteEmployee(long employeeId) {
 		employeeRepository.deleteById(employeeId);
 		return null;
 	}
 
+	/**
+	 * Method to get the salary of an employee
+	 * @param employeeId
+	 * @param month
+	 * @param year
+	 * @return
+	 * @throws WrongRequestDateException
+	 */
 	public PaymentDTO getEmployeePay(long employeeId, int month, int year) throws WrongRequestDateException {
 		BigDecimal salary = new BigDecimal(0);
 		int monthWorkedDays = 0;
@@ -105,6 +138,12 @@ public class EmployeeService {
 		return paymentRes;
 	}
 
+	/**
+	 * Method to calculate salary
+	 * @param employee
+	 * @param monthWorkedDays
+	 * @return
+	 */
 	public BigDecimal payment(EmployeeEntity employee, int monthWorkedDays) {
 		return employee.getSalary().divide(new BigDecimal(DAYS_OF_MONTH), 2, RoundingMode.CEILING)
 				.multiply(new BigDecimal(monthWorkedDays));
