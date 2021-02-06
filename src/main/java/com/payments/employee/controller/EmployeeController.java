@@ -1,6 +1,7 @@
 package com.payments.employee.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.payments.employee.dto.EmployeeDTO;
+import com.payments.employee.dto.PaymentDTO;
+import com.payments.employee.exception.WrongRequestDateException;
 import com.payments.employee.repository.EmployeeEntity;
 import com.payments.employee.service.EmployeeService;
 
@@ -64,4 +67,10 @@ public class EmployeeController {
 		employeeService.deleteEmployee(EmployeeId);
 		return ResponseEntity.noContent().build();
 	}
+
+	
+	@PostMapping("/employee/pay")
+	public PaymentDTO createEmployee(@RequestBody PaymentDTO payment) throws IOException, WrongRequestDateException {
+		return employeeService.getEmployeePay(payment.getEmployeeId(), payment.getMonth(), payment.getYear());	
+	}	
 }
